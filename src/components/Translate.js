@@ -5,23 +5,56 @@ import axios from 'axios';
 const Translate = () => {
     const [inputText, setInputText] = useState('');
     const [resultText, setResultText] = useState('');
-    const [languagesList, setLanguagesList] = useState([])
+    const [selectedLanguageKey, setSelectedLanguageKey] = useState('')
+    const [languagesList, setLanguagesList] = useState([]);
+    const [detectLanguageKey, setDetectLanguageKey] = useState('')
 
+    const getLanguageSource = () => {
+        axios.post(`https://libretranslate.com/detect`, {
+            q: inputText,
+            api_key: '3857b65a-f5e0-42a9-a135-5dcb491681c4',
+            source: '',
+        })
+        .then((response) => {
+            setDetectLanguageKey(response.data[0].language);
+        })
+    }
     const translateText = () => {
         setResultText(inputText);
+
+        getLanguageSource();
+
+        let data = {
+            q: inputText,
+            source: detectLanguageKey,
+            target: selectedLanguageKey,
+            api_key: '3857b65a-f5e0-42a9-a135-5dcb491681c4'
+        }
+        axios.post(`https://libretranslate.com/translate`, data)
+        .then((response) => {
+            setResultText(response.data.translatedText);
+        })
     }
 
     const languageKey = (selectedLanguage) => {
-        console.log(selectedLanguage.target.value)
+        setSelectedLanguageKey(selectedLanguage.target.value)
     }
 
     useEffect(() => {
-        axios.get('https://libretranslate.com/languages')
+        let data = {
+            q: inputText,
+            source: detectLanguageKey,
+            target: selectedLanguageKey,
+            api_key: '3857b65a-f5e0-42a9-a135-5dcb491681c4'
+        }
+
+        axios.get('https://libretranslate.com/languages', data)
             .then((response) => {
                 setLanguagesList(response.data);
             })
 
-    }, [])
+            getLanguageSource();
+    }, [inputText])
     return (
         <div className='h-screen flex flex-col justify-center w-full items-center'>
             <h2>Translator</h2>
@@ -31,9 +64,10 @@ const Translate = () => {
                     onChange={(e) => setInputText(e.target.value)}
                 />
                 <select className='m-2 p-2' onChange={languageKey}>
+                    <option>Select language</option>
                     {languagesList.map((language) => {
                         return (
-                            <option value={language.code}>{language.name}</option>
+                            <option key={language.code} value={language.code}>{language.name}</option>
                         )
                     })}
                 </select>
