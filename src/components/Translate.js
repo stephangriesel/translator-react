@@ -13,7 +13,7 @@ const Translate = () => {
     axios
       .post(`https://libretranslate.com/detect`, {
         q: inputText,
-        api_key: "3857b65a-f5e0-42a9-a135-5dcb491681c4",
+        api_key: process.env.REACT_APP_API_KEY,
         source: "",
       })
       .then(response => {
@@ -29,7 +29,7 @@ const Translate = () => {
       q: inputText,
       source: detectLanguageKey,
       target: selectedLanguageKey,
-      api_key: "3857b65a-f5e0-42a9-a135-5dcb491681c4",
+      api_key: process.env.REACT_APP_API_KEY,
     };
     axios.post(`https://libretranslate.com/translate`, data).then(response => {
       setResultText(response.data.translatedText);
@@ -45,7 +45,7 @@ const Translate = () => {
       q: inputText,
       source: detectLanguageKey,
       target: selectedLanguageKey,
-      api_key: "3857b65a-f5e0-42a9-a135-5dcb491681c4",
+      api_key: process.env.REACT_APP_API_KEY,
     };
 
     axios.get("https://libretranslate.com/languages", data).then(response => {
