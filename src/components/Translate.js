@@ -56,10 +56,9 @@ const Translate = () => {
   }, [inputText]);
   return (
     <div className="h-screen flex flex-col justify-center w-full items-center">
-      <h2>Translator</h2>
-      <div className="flex flex-col">
+      <div className="flex flex-col p-8 rounded-lg shadow-black bg-gray-100">
         <textarea
-          className="p-4 m-2 bg-neutral-400 h-40"
+          className="p-4 m-2 bg-neutral-400 h-40 rounded-lg"
           onChange={e => setInputText(e.target.value)}
         />
         <select className="m-2 p-2" onChange={languageKey}>
@@ -73,7 +72,7 @@ const Translate = () => {
           })}
         </select>
         <textarea
-          className="p-4 m-2 bg-neutral-400 h-40"
+          className="p-4 m-2 bg-neutral-400 h-40 rounded-lg"
           readOnly
           value={resultText}
         />
