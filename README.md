@@ -19,8 +19,8 @@ Change to /server directory
 
 ### Arcitecture
 
-React frontend styled with Tailwind
-Backend running Express framework for Nodejs
-
-Post requests running client side 
+React frontend styled with Tailwind<br>
+Backend running Express framework for Nodejs<br>
+<br>
+Post requests running client side <br>
 Get requests running on backend
