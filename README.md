@@ -6,13 +6,16 @@ Please follow steps below to start backend & frontend
 
 ### Frontend
 
-1. npm install
-2. In root directory run "npm start"
+In root directory
 
+1. npm install
+2. run "npm start"
 ### Backend
 
+Change to /server directory
+
 1. npm install
-2. Change to /server directory and run "npm start"
+2. run "npm start"
 
 ### Arcitecture
 
