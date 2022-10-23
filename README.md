@@ -9,7 +9,9 @@ Please follow steps below to start backend & frontend
 In root directory
 
 1. npm install
-2. run "npm start"
+2. rename .env.example to .env and replace with your API key
+3. run "npm start"
+
 ### 🖥 Backend
 
 Change to /server directory
