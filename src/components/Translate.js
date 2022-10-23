@@ -48,7 +48,7 @@ const Translate = () => {
       api_key: process.env.REACT_APP_API_KEY,
     };
 
-    axios.get("https://libretranslate.com/languages", data).then(response => {
+    axios.get("http://localhost:8888/languages", data).then(response => {
       setLanguagesList(response.data);
     });
 
