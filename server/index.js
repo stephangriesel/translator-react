@@ -1,12 +1,11 @@
-const fs = require("fs/promises");
-const cors = require("cors");
-const { application } = require("express");
 const express = require("express");
-
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
-
 const app = express();
+const cors = require("cors");
+const PORT = process.env.PORT || 8888;
+
+app.use(cors());
 
 app.get(`/languages`, async function (req, res) {
   const url = "https://libretranslate.com/languages";
@@ -27,4 +26,6 @@ app.get(`/languages`, async function (req, res) {
   }
 });
 
-app.listen(8888, () => console.log("API is running"));
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});

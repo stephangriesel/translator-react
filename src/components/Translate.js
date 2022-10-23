@@ -10,15 +10,15 @@ const Translate = () => {
   const [detectLanguageKey, setDetectLanguageKey] = useState("");
 
   const getLanguageSource = () => {
-    axios
-      .post(`https://libretranslate.com/detect`, {
-        q: inputText,
-        api_key: process.env.REACT_APP_API_KEY,
-        source: "",
-      })
-      .then(response => {
-        setDetectLanguageKey(response.data[0].language);
-      });
+    let data = {
+      q: inputText,
+      source: detectLanguageKey,
+      target: selectedLanguageKey,
+      api_key: process.env.REACT_APP_API_KEY,
+    };
+    axios.post(`https://libretranslate.com/detect`, data).then(response =>  {
+      setDetectLanguageKey(response.data[0].language);
+    })
   };
   const translateText = () => {
     setResultText(inputText);
@@ -48,7 +48,7 @@ const Translate = () => {
       api_key: process.env.REACT_APP_API_KEY,
     };
 
-    axios.get("https://libretranslate.com/languages", data).then(response => {
+    axios.get("http://localhost:8888/languages", data).then(response => {
       setLanguagesList(response.data);
     });
 
